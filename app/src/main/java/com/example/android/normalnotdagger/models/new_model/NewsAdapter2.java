@@ -18,9 +18,9 @@ import butterknife.ButterKnife;
 
 public class NewsAdapter2 extends RecyclerView.Adapter<NewsAdapter2.ViewHolder>{
 
-    private List<String> posts;
+    private List<News> posts;
 
-    public NewsAdapter2(List<String> posts) {
+    public NewsAdapter2(List<News> posts) {
         this.posts = posts;
         Log.e("Test", "adapter "+this.posts.size());
     }
@@ -35,13 +35,13 @@ public class NewsAdapter2 extends RecyclerView.Adapter<NewsAdapter2.ViewHolder>{
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        String post = posts.get(position);
-        holder.dateTextView.setText(post);
-        holder.autorTextView.setText(post);
-        holder.headTextView.setText(post);
-        holder.subTextView.setText(post);
-        holder.viewsTextView.setText(post);
-        holder.ratingTextView.setText(post);
+        News post = posts.get(position);
+        holder.dateTextView.setText(post.getDate());
+        holder.autorTextView.setText(post.getUserLogin());
+        holder.headTextView.setText(post.getTitle());
+        holder.subTextView.setText(post.getShort());
+        holder.viewsTextView.setText(post.getViews());
+        holder.ratingTextView.setText(post.getMark());
 
     }
 

@@ -15,7 +15,9 @@ import com.example.android.normalnotdagger.R;
 import com.example.android.normalnotdagger.api.App;
 import com.example.android.normalnotdagger.models.new_model.News;
 import com.example.android.normalnotdagger.models.new_model.NewsAdapter2;
+import com.example.android.normalnotdagger.models.new_model.NewsMVP;
 import com.example.android.normalnotdagger.models.new_model.NewsModel;
+import com.example.android.normalnotdagger.models.new_model.NewsPresentr;
 
 
 import java.util.ArrayList;
@@ -26,7 +28,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class NewsFragment extends Fragment{
+public class NewsFragment extends Fragment implements NewsMVP{
     List<News> posts;
     List<String> l;
     RecyclerView recyclerView;
@@ -39,42 +41,41 @@ public class NewsFragment extends Fragment{
         recyclerView = (RecyclerView) inflater.inflate(
                 R.layout.recycler_view, container, false);
 
+
         posts = new ArrayList<>();
+
+        NewsPresentr pr = new NewsPresentr(this);
+        pr.loadNews("2","0");
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        l = new ArrayList<>();
-        l.add("1");
-        l.add("2");
-        l.add("3");
-        l.add("4");
-        l.add("5");
 
-        newsAdapter = new NewsAdapter2(l);
+
         recyclerView.setAdapter(newsAdapter);
 
 
 
-        App.getApi().getData("2", "0", "1").enqueue(new Callback<NewsModel>() {
-            @Override
-            public void onResponse(Call<NewsModel> call, Response<NewsModel> response) {
-                Log.e("sizeTest", response.body().getNews().size() + "test");
-                posts = response.body().getNews();
-               // posts.addAll(posts);
-                newsAdapter = new NewsAdapter2(l);
-
-                recyclerView.getAdapter().notifyDataSetChanged();
-            }
-
-            @Override
-            public void onFailure(Call<NewsModel> call, Throwable t) {
-                Log.e("error", t.getMessage());
-                Toast.makeText(getActivity(), "An error occurred during networking", Toast.LENGTH_SHORT).show();
-            }
-        });
-
 
 
         return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    public void showNews(List<News> posts) {
+        Log.e("testPresentr", posts.get(0).getText());
+        newsAdapter = new NewsAdapter2(posts);
+        recyclerView.setAdapter(newsAdapter);
+        recyclerView.getAdapter().notifyDataSetChanged();
+    }
+
+    @Override
+    public void showError() {
+
+        Toast.makeText(getActivity(), "An error occurred during networking", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showIsEmpty() {
+
     }
 }
