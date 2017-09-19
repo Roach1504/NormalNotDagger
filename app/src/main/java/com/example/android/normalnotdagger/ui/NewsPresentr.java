@@ -1,12 +1,10 @@
-package com.example.android.normalnotdagger.models.new_model;
+package com.example.android.normalnotdagger.ui;
 
 
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.android.normalnotdagger.api.App;
-
-import java.util.List;
+import com.example.android.normalnotdagger.models.new_model.NewsModel;
 
 import retrofit2.Call;
 import retrofit2.Callback;

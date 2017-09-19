@@ -10,22 +10,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 import com.example.android.normalnotdagger.R;
-import com.example.android.normalnotdagger.api.App;
 import com.example.android.normalnotdagger.models.new_model.News;
 import com.example.android.normalnotdagger.models.new_model.NewsAdapter2;
-import com.example.android.normalnotdagger.models.new_model.NewsMVP;
-import com.example.android.normalnotdagger.models.new_model.NewsModel;
-import com.example.android.normalnotdagger.models.new_model.NewsPresentr;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+
 
 
 public class NewsFragment extends Fragment implements NewsMVP{

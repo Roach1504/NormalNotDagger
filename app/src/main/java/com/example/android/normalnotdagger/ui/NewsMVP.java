@@ -1,5 +1,7 @@
-package com.example.android.normalnotdagger.models.new_model;
+package com.example.android.normalnotdagger.ui;
 
+
+import com.example.android.normalnotdagger.models.new_model.News;
 
 import java.util.List;
 
