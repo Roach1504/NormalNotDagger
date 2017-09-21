@@ -1,5 +1,6 @@
-package com.example.android.normalnotdagger.ui;
+package com.example.android.normalnotdagger.ui.news;
 
+import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,7 +10,7 @@ import android.widget.TextView;
 
 
 import com.example.android.normalnotdagger.R;
-import com.example.android.normalnotdagger.models.new_model.News;
+import com.example.android.normalnotdagger.models.new_model.news.News;
 
 import java.util.List;
 
@@ -21,27 +22,41 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.RibotViewHolde
 
 
     private List<News> mRibots;
+    NewsPresentr pr;
+    SharedPreferences user;
+    int pag =20;
 
-    public NewsAdapter(List<News> posts) {
+    public NewsAdapter(List<News> posts, NewsPresentr pr,SharedPreferences user) {
+
         this.mRibots = posts;
+        this.pr = pr;
+        this.user = user;
     }
 
-    public void setPosts(List<News> ribots) {
-        mRibots = ribots;
+    public void addPosts(List<News> ribots) {
+        for(News i: ribots){
+            mRibots.add(i);
+        }
     }
 
     @Override
     public RibotViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_news, parent, false);
+
+
         return new RibotViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(final RibotViewHolder holder, int position) {
+        if(position == (pag-6)){
+            pr.loadNews("1",pag);
+            pag+=20;
+        }
 
 
-        News example = mRibots.get(position);
+        final News example = mRibots.get(position);
         //Log.e("ExampleList", "id=" + example.getId() + " url= " + example.getAvatarUrl());
 
 //        if (example.getAvatarUrl() != null)
@@ -53,20 +68,32 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.RibotViewHolde
 //                        .centerCrop()
 //                        .into(holder.avatar);
 //            }
-holder.dateTextView.setText(example.getDate());
-        holder.autorTextView.setText("Autor");
+
+        holder.dateTextView.setText(example.getDate());
+        holder.autorTextView.setText(example.getUserLogin());
         holder.headTextView.setText(example.getTitle());
         holder.subTextView.setText(example.getShort());
         holder.viewsTextView.setText(example.getViews());
-        holder.ratingTextView.setText(example.getMark());
-
+        holder.ratingTextView.setText(example.getMark().toString());
+        if(!user.getString("id","error").equals("error")){
+            pr.addView(user.getString("id", "1"), example.getPostId().toString());
+        }
 
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+
+                //проследить нажатия на лайк или дизнлайк, в соответствии с параметром передать 1 или -1
+                if(!user.getString("id","error").equals("error")){
+                    pr.addLike(user.getString("id", "1"),example.getPostId().toString(),1);
+                    //example.setViews((example.getMark()+1)+"");
+                }
+                else{
+                    //заблочить кнопки лайка
+                }
 //                itemClickAdapter(v.getContext(), holder.getAdapterPosition());
-                Log.e("click", "click= " + holder.getAdapterPosition());
+                Log.e("click", "click id= "+ example.getPostId());
 
             }
         });

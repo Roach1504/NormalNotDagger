@@ -1,6 +1,8 @@
-package com.example.android.normalnotdagger.ui;
+package com.example.android.normalnotdagger.ui.news;
 
 import android.app.Fragment;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,8 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 import com.example.android.normalnotdagger.R;
-import com.example.android.normalnotdagger.models.new_model.News;
-import com.example.android.normalnotdagger.models.new_model.NewsAdapter2;
+import com.example.android.normalnotdagger.models.new_model.news.News;
+
 
 
 import java.util.ArrayList;
@@ -25,7 +27,9 @@ public class NewsFragment extends Fragment implements NewsMVP{
     List<News> posts;
     List<String> l;
     RecyclerView recyclerView;
-    NewsAdapter2 newsAdapter;
+    NewsAdapter newsAdapter;
+    NewsPresentr pr;
+    SharedPreferences user;
 
 
     @Nullable
@@ -34,41 +38,46 @@ public class NewsFragment extends Fragment implements NewsMVP{
         recyclerView = (RecyclerView) inflater.inflate(
                 R.layout.recycler_view, container, false);
 
+        user = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
 
         posts = new ArrayList<>();
 
-        NewsPresentr pr = new NewsPresentr(this);
-        pr.loadNews("2","0");
+        pr = new NewsPresentr(this);
+        pr.loadNews("1",0);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-
-
         recyclerView.setAdapter(newsAdapter);
-
-
-
-
-
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return recyclerView;
     }
 
     @Override
     public void showNews(List<News> posts) {
+        List<News> postsNull = new ArrayList<>();
         Log.e("testPresentr", posts.get(0).getText());
-        newsAdapter = new NewsAdapter2(posts);
+        newsAdapter = new NewsAdapter(postsNull, pr, user);
+        newsAdapter.addPosts(posts);
         recyclerView.setAdapter(newsAdapter);
         recyclerView.getAdapter().notifyDataSetChanged();
     }
 
     @Override
     public void showError() {
-
-        Toast.makeText(getActivity(), "An error occurred during networking", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "Ошибка соеденения с интернетом", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void showIsEmpty() {
-
+        Toast.makeText(getActivity(), "Новостей нет", Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void addLike() {
+       // Toast.makeText(getActivity(), "Add like", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void addLikeError(String res) {
+        Toast.makeText(getActivity(), res,Toast.LENGTH_SHORT).show();
+    }
+
 }

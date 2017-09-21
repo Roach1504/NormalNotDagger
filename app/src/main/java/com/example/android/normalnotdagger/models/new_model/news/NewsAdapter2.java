@@ -1,20 +1,14 @@
-package com.example.android.normalnotdagger.models.new_model;
+package com.example.android.normalnotdagger.models.new_model.news;
 
 
-import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import com.example.android.normalnotdagger.R;
-
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class NewsAdapter2 extends RecyclerView.Adapter<NewsAdapter2.ViewHolder>{
 
@@ -41,7 +35,7 @@ public class NewsAdapter2 extends RecyclerView.Adapter<NewsAdapter2.ViewHolder>{
         holder.headTextView.setText(post.getTitle());
         holder.subTextView.setText(post.getShort());
         holder.viewsTextView.setText(post.getViews());
-        holder.ratingTextView.setText(post.getMark());
+        holder.ratingTextView.setText(post.getMark().toString());
 
     }
 
@@ -54,26 +48,23 @@ public class NewsAdapter2 extends RecyclerView.Adapter<NewsAdapter2.ViewHolder>{
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.textDate)
         TextView dateTextView;
-        @BindView(R.id.textAutor)
         TextView autorTextView;
-        @BindView(R.id.head)
         TextView headTextView;
-        @BindView(R.id.subtitle)
         TextView subTextView;
-        @BindView(R.id.views)
         TextView viewsTextView;
-        @BindView(R.id.rating)
         TextView ratingTextView;
-        @BindView(R.id.layout)
-        View layout;
 
 
 
         public ViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this, itemView);
+            dateTextView = (TextView) itemView.findViewById(R.id.textDate);
+            autorTextView = (TextView) itemView.findViewById(R.id.textAutor);
+            headTextView = (TextView) itemView.findViewById(R.id.head);
+            subTextView = (TextView) itemView.findViewById(R.id.subtitle);
+            viewsTextView = (TextView) itemView.findViewById(R.id.views);
+            ratingTextView = (TextView) itemView.findViewById(R.id.rating);
         }
     }
 }

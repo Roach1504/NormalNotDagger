@@ -1,28 +1,38 @@
 package com.example.android.normalnotdagger;
 
 import android.app.FragmentManager;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.android.normalnotdagger.models.new_model.InewsFragment;
+import com.example.android.normalnotdagger.models.new_model.news.InewsFragment;
+import com.example.android.normalnotdagger.ui.user_info.UserFragment;
+
+
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+
+    SharedPreferences user;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        user = getSharedPreferences("user", Context.MODE_PRIVATE);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -36,7 +46,7 @@ public class MainActivity extends AppCompatActivity
         InewsFragment youFragment = new InewsFragment();
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()          // получаем экземпляр FragmentTransaction
-                .add(R.id.content, youFragment)
+                .replace(R.id.content, youFragment)
                 .addToBackStack("myStack")
                 .commit();
 
@@ -83,10 +93,19 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        Fragment fragment = null;
+
+        Class fragmentClass = null;
+
         if (id == R.id.nav_camera) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
-
+            UserFragment youFragment = new UserFragment();
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction()          // получаем экземпляр FragmentTransaction
+                    .replace(R.id.content, youFragment)
+                    .addToBackStack("myStack")
+                    .commit();
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_manage) {

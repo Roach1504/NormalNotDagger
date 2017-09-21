@@ -1,4 +1,4 @@
-package com.example.android.normalnotdagger.models.new_model;
+package com.example.android.normalnotdagger.models.new_model.news;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.android.normalnotdagger.R;
-import com.example.android.normalnotdagger.ui.NewsFragment;
+import com.example.android.normalnotdagger.ui.news.NewsFragment;
 
 
 public class InewsFragment extends Fragment {
