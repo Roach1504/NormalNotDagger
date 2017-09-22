@@ -19,6 +19,7 @@ public class UserPresenter {
         this.user = user;
     }
     void loadInfo(){
+        mvp.startProgresBar();
         App.getApi().getUserInfo(user.getString("id","error")).enqueue(new Callback<UserModel>() {
             @Override
             public void onResponse(Call<UserModel> call, Response<UserModel> response) {
@@ -27,11 +28,13 @@ public class UserPresenter {
                         response.body().getCity(),
                         response.body().getTel(),
                         response.body().getSubNum());
+                mvp.stopProgresBar();
             }
 
             @Override
             public void onFailure(Call<UserModel> call, Throwable t) {
                 mvp.showError("Ошибка соеденения");
+                mvp.stopProgresBar();
             }
         });
 

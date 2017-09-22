@@ -18,23 +18,27 @@ public class NewsPresentr {
     }
 
     public void loadNews(String user_id, int offset){
-        App.getApi().getData("20", offset, user_id).enqueue(new Callback<NewsModel>() {
+        mvp.startProgresBar();
+        App.getApi().getData("20", offset, "1").enqueue(new Callback<NewsModel>() {
             @Override
             public void onResponse(Call<NewsModel> call, Response<NewsModel> response) {
                 Log.e("sizeTest", response.body().getNews().get(0).getText() + "test");
                 if(response.body().getNews().isEmpty()){
                     mvp.showIsEmpty();
+                    mvp.stopProgresBar();
                 }
                 else{
                     mvp.showNews(response.body().getNews());
+                    mvp.stopProgresBar();
                 }
 
             }
 
             @Override
             public void onFailure(Call<NewsModel> call, Throwable t) {
-                Log.e("error", t.getMessage());
+                Log.e("error1", t.getMessage());
                 mvp.showError();
+                mvp.stopProgresBar();
                 //Toast.makeText(getActivity(), "An error occurred during networking", Toast.LENGTH_SHORT).show();
             }
         });

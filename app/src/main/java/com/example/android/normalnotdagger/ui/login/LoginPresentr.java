@@ -19,22 +19,26 @@ public class LoginPresentr {
         this.user = user;
     }
     void loadLogin(String login, String pass){
+        mvp.startProgresBar();
         App.getApi().getAvtor(login,pass).enqueue(new Callback<RegistModel>() {
             @Override
             public void onResponse(Call<RegistModel> call, Response<RegistModel> response) {
                 if(response.body().getId().equals("-1")){
                     mvp.showError("Неверный логин или пароль");
+                    mvp.stopProgresBar();
                 }
                 else{
                     Log.e("id:", response.body().getId());
                     user.edit().putString("id", response.body().getId()).commit();
                     mvp.showStatus("Авторизация прошла успешна");
+                    mvp.stopProgresBar();
                 }
             }
 
             @Override
             public void onFailure(Call<RegistModel> call, Throwable t) {
                 mvp.showError("Ошибка соеденения");
+                mvp.stopProgresBar();
             }
         });
     }

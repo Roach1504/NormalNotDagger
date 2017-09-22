@@ -84,6 +84,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.RibotViewHolde
             public void onClick(View v) {
 
 
+
                 //проследить нажатия на лайк или дизнлайк, в соответствии с параметром передать 1 или -1
                 if(!user.getString("id","error").equals("error")){
                     pr.addLike(user.getString("id", "1"),example.getPostId().toString(),1);

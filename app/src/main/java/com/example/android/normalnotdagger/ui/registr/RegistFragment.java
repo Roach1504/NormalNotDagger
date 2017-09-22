@@ -1,6 +1,7 @@
 package com.example.android.normalnotdagger.ui.registr;
 
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.normalnotdagger.R;
+import com.example.android.normalnotdagger.ui.user_info.UserFragment;
 
 
 import butterknife.BindView;
@@ -66,11 +68,27 @@ public class RegistFragment extends Fragment implements RegistMVP {
     @Override
     public void showStatus(String status) {
         Toast.makeText(getActivity(), status, Toast.LENGTH_SHORT).show();
+        UserFragment youFragment = new UserFragment();
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()          // получаем экземпляр FragmentTransaction
+                .replace(R.id.content, youFragment)
+                .addToBackStack("myStack")
+                .commit();
 
     }
 
     @Override
     public void showError(String error) {
         Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void startProgresBar() {
+        //запустить прогрес бар
+    }
+
+    @Override
+    public void stopProgresBar() {
+        //остановить прогрес бар
     }
 }

@@ -90,4 +90,14 @@ public class UserFragment extends Fragment implements UserMVP{
     public void showError(String error) {
         Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show();
     }
+
+    @Override
+    public void startProgresBar() {
+        //запустить прогрес бар
+    }
+
+    @Override
+    public void stopProgresBar() {
+        //остановить прогрес бар
+    }
 }

@@ -11,5 +11,7 @@ public interface NewsMVP {
     void showIsEmpty();
     void addLike();
     void addLikeError(String res);
+    void startProgresBar();
+    void stopProgresBar();
 
 }

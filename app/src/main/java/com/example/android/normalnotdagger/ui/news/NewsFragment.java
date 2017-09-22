@@ -80,4 +80,14 @@ public class NewsFragment extends Fragment implements NewsMVP{
         Toast.makeText(getActivity(), res,Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void startProgresBar() {
+        //запустить прогрес бар
+    }
+
+    @Override
+    public void stopProgresBar() {
+        //остановить прогрес бар
+    }
+
 }

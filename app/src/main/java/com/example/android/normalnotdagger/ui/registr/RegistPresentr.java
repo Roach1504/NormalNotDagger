@@ -21,21 +21,25 @@ public class RegistPresentr {
     }
 
     void loadRegist(String login, String pass, String name, String family, String city, String tel){
+        mvp.startProgresBar();
         App.getApi().getRegist(login, pass, name, family, city,tel).enqueue(new Callback<RegistModel>() {
             @Override
             public void onResponse(Call<RegistModel> call, Response<RegistModel> response) {
                 if(response.body().getRespons().getId().equals("-1")){
                     mvp.showError(response.body().getStatus());
+                    mvp.stopProgresBar();
                 }
                 else {
                     user.edit().putString("id", response.body().getId()).commit();
                     Log.e("regist", "id: " + user.getString("id","error"));
                     mvp.showStatus(response.body().getStatus());
+                    mvp.stopProgresBar();
                 }
             }
             @Override
             public void onFailure(Call<RegistModel> call, Throwable t) {
                 mvp.showError("Ошибка соеденения");
+                mvp.stopProgresBar();
             }
         });
     }
