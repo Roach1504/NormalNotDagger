@@ -6,35 +6,7 @@
     android:orientation="vertical"
     android:theme="@style/AppTheme">
 
-    <LinearLayout
-        android:id="@+id/toolbarLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            style="@style/AppTheme"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_weight="5"
-            android:background="?attr/colorPrimary"
-            app:theme="@style/AppTheme" />
-
-        <TextView
-            android:id="@+id/buttonCreate"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignBottom="@+id/toolbar"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:clickable="true"
-            android:gravity="center_vertical"
-            android:paddingRight="24dp"
-            android:text="cоздать"
-            android:textSize="18dp" />
-    </LinearLayout>
 
 
 
@@ -48,7 +20,7 @@
         android:ems="10"
         android:hint="Логин"
         android:inputType="textEmailAddress"
-        android:layout_below="@+id/toolbarLayout"
+
         />
 
 
@@ -86,7 +58,10 @@
         android:layout_alignLeft="@+id/helpText"
         android:layout_alignStart="@+id/helpText"
         android:layout_alignRight="@+id/buttonHelp"
-        android:layout_alignEnd="@+id/buttonHelp" />
+        android:layout_alignEnd="@+id/buttonHelp"
+        android:background="@drawable/button_background"
+        android:textColor="@color/white"
+        android:elevation="2dp"/>
 
     <TextView
         android:id="@+id/helpText"
@@ -99,6 +74,20 @@
 
         android:layout_alignRight="@+id/pass"
         android:layout_alignEnd="@+id/pass" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:fabSize="normal"
+        app:srcCompat="@drawable/ic_add_white_24dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        />
 
 
 </RelativeLayout>
