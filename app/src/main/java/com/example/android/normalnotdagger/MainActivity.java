@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.android.normalnotdagger.models.new_model.news.InewsFragment;
+import com.example.android.normalnotdagger.ui.cread_news.CreadNewsFragment;
 import com.example.android.normalnotdagger.ui.user_info.UserFragment;
 
 
@@ -98,6 +99,13 @@ public class MainActivity extends AppCompatActivity
         Class fragmentClass = null;
 
         if (id == R.id.nav_camera) {
+            InewsFragment youFragment = new InewsFragment();
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction()          // получаем экземпляр FragmentTransaction
+                    .replace(R.id.content, youFragment)
+                    .addToBackStack("myStack")
+                    .commit();
+
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
             UserFragment youFragment = new UserFragment();
@@ -107,6 +115,12 @@ public class MainActivity extends AppCompatActivity
                     .addToBackStack("myStack")
                     .commit();
         } else if (id == R.id.nav_slideshow) {
+            CreadNewsFragment youFragment = new CreadNewsFragment();
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction()          // получаем экземпляр FragmentTransaction
+                    .replace(R.id.content, youFragment)
+                    .addToBackStack("myStack")
+                    .commit();
 
         } else if (id == R.id.nav_manage) {
 

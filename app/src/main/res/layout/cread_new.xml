@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+
+    <EditText
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Название" />
+
+    <EditText
+        android:id="@+id/shorts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Краткое описание" />
+
+    <EditText
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Текст" />
+
+    <Button
+        android:id="@+id/addimag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Добавить фаил" />
+
+    <Button
+        android:id="@+id/cread"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Создать" />
+
+    <ImageView
+        android:id="@+id/gallery_imag"
+        android:layout_width="201dp"
+        android:layout_height="216dp"
+        app:srcCompat="@android:drawable/ic_menu_camera" />
+</LinearLayout>
