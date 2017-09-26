@@ -11,11 +11,10 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.android.normalnotdagger.models.new_model.news.InewsFragment;
+import com.example.android.normalnotdagger.ui.news.InewsFragment;
 import com.example.android.normalnotdagger.ui.cread_news.CreadNewsFragment;
 import com.example.android.normalnotdagger.ui.user_info.UserFragment;
 

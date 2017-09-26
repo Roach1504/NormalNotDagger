@@ -1,6 +1,7 @@
 package com.example.android.normalnotdagger.ui.news;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,8 +15,9 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 import com.example.android.normalnotdagger.R;
 import com.example.android.normalnotdagger.models.new_model.news.News;
-
-
+import com.example.android.normalnotdagger.ui.commits.CommentFragment;
+import com.example.android.normalnotdagger.ui.commits.ICommentsFragment;
+import com.example.android.normalnotdagger.ui.user_wall.UserWallFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +26,7 @@ import java.util.List;
 
 
 public class NewsFragment extends Fragment implements NewsMVP{
-    List<News> posts;
-    List<String> l;
+    List<News> posts = new ArrayList<>();
     RecyclerView recyclerView;
     NewsAdapter newsAdapter;
     NewsPresentr pr;
@@ -47,16 +48,16 @@ public class NewsFragment extends Fragment implements NewsMVP{
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(newsAdapter);
+        newsAdapter = new NewsAdapter(posts, pr, user);
+        recyclerView.setAdapter(newsAdapter);
+
         return recyclerView;
     }
 
     @Override
     public void showNews(List<News> posts) {
-        List<News> postsNull = new ArrayList<>();
         Log.e("testPresentr", posts.get(0).getText());
-        newsAdapter = new NewsAdapter(postsNull, pr, user);
         newsAdapter.addPosts(posts);
-        recyclerView.setAdapter(newsAdapter);
         recyclerView.getAdapter().notifyDataSetChanged();
     }
 
@@ -88,6 +89,33 @@ public class NewsFragment extends Fragment implements NewsMVP{
     @Override
     public void stopProgresBar() {
         //остановить прогрес бар
+    }
+
+    @Override
+    public void startUserInfo(String avtor_id) {
+        UserWallFragment youFragment = new UserWallFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("avtor_id", avtor_id);
+        youFragment.setArguments(bundle);
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()          // получаем экземпляр FragmentTransaction
+                .replace(R.id.content, youFragment)
+                .addToBackStack("myStack")
+                .commit();
+    }
+
+    @Override
+    public void startComments(String post_id) {
+        ICommentsFragment youFragment = new ICommentsFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("post_id", post_id);
+        youFragment.setArguments(bundle);
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()          // получаем экземпляр FragmentTransaction
+                .replace(R.id.content, youFragment)
+                .addToBackStack("myStack")
+                .commit();
+
     }
 
 }

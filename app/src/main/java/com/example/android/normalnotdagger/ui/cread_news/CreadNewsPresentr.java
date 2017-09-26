@@ -13,6 +13,7 @@ import com.example.android.normalnotdagger.ipaulpro.afilechooser.utils.FileUtils
 import com.example.android.normalnotdagger.models.new_model.cread_news.CreadNewModel;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ import java.util.List;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -48,15 +50,11 @@ public class CreadNewsPresentr {
 
         List<MultipartBody.Part> f = new ArrayList<>();
 
+
         for(Uri i: files){
-            Log.e("Uri", ""+i);
             File file = FileUtils.getFile(context, i);
-
-
-            RequestBody requestBody = RequestBody.create(MediaType.parse("pac"), file);
-            MultipartBody.Part filePart = MultipartBody.Part.createFormData("images", "name", requestBody);
-           // MultipartBody.Part filePartMass = new MultipartBody.Part[]{filePart,filePart};
-
+            RequestBody requestBody = RequestBody.create(MediaType.parse("images"), file);
+            MultipartBody.Part filePart = MultipartBody.Part.createFormData("images[]", file.getName(), requestBody);
             f.add(filePart);
         }
 
@@ -66,9 +64,11 @@ public class CreadNewsPresentr {
 
         if(!user.getString("id","error").equals("error")) {
             Log.e("News",title+", "+shorts+", "+text+", "+user.getString("id","eeeeerr")+ ", "+ data+", "+f);
-            App.getApi().getCreadNew(title, shorts,text,data,user.getString("id","1"),f).enqueue(new Callback<CreadNewModel>() {
+            Call<CreadNewModel> call = App.getApi().getCreadNew(title, shorts,text,data,user.getString("id","1"),f);
+            call.enqueue(new Callback<CreadNewModel>() {
                 @Override
-                public void onResponse(Call<CreadNewModel> call, Response<CreadNewModel> response) {
+                public void onResponse(Call<CreadNewModel> call,
+                                       Response<CreadNewModel> response) {
                     if(!response.body().getStatus().equals("fail")){
                         mvp.stopProgresBar();
                         mvp.showStatus("Пост успешно опубликован");
@@ -77,16 +77,39 @@ public class CreadNewsPresentr {
                         mvp.stopProgresBar();
                         mvp.showStatus("Ошибка создания поста");
                     }
+                        Log.e("error", response.body().getStatus());
+                    Log.e("Upload", "success");
                 }
 
                 @Override
                 public void onFailure(Call<CreadNewModel> call, Throwable t) {
-                    mvp.stopProgresBar();
-                    Log.e("Error", "error: "+t);
+                    Log.e("Upload error:", t + "");
                     mvp.showError("Ошибка интернет соеденения");
-
                 }
             });
+//            App.getApi().getCreadNew(title, shorts,text,data,user.getString("id","1"),f).enqueue(new Callback<CreadNewModel>() {
+//                @Override
+//                public void onResponse(Call<CreadNewModel> call, Response<CreadNewModel> response) {
+//                    Log.e("respons",response.message()+"::, "+response.body().toString().trim());
+//                    Log.e("respons",response.message()+"::, "+response.body());
+//                    if(!response.body().getStatus().equals("fail")){
+//                        mvp.stopProgresBar();
+//                        mvp.showStatus("Пост успешно опубликован");
+//                    }
+//                    else {
+//                        mvp.stopProgresBar();
+//                        mvp.showStatus("Ошибка создания поста");
+//                    }
+//                }
+//
+//                @Override
+//                public void onFailure(Call<CreadNewModel> call, Throwable t) {
+//                    mvp.stopProgresBar();
+//                    Log.e("Error", "error: "+t);
+//                    mvp.showError("Ошибка интернет соеденения");
+//
+//                }
+//            });
 
         }
         else {

@@ -1,5 +1,6 @@
 package com.example.android.normalnotdagger.ui.news;
 
+import android.app.FragmentManager;
 import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,7 +12,10 @@ import android.widget.TextView;
 
 import com.example.android.normalnotdagger.R;
 import com.example.android.normalnotdagger.models.new_model.news.News;
+import com.example.android.normalnotdagger.ui.user_info.UserFragment;
+import com.example.android.normalnotdagger.ui.user_wall.UserWallFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -21,7 +25,7 @@ import butterknife.ButterKnife;
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.RibotViewHolder> {
 
 
-    private List<News> mRibots;
+    private List<News> mRibots = new ArrayList<>();
     NewsPresentr pr;
     SharedPreferences user;
     int pag =20;
@@ -86,7 +90,17 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.RibotViewHolde
 
                 Log.e("image","imag: "+example.getImages());
 
-                //проследить нажатия на лайк или дизнлайк, в соответствии с параметром передать 1 или -1
+
+                // при онклике на имя автора сробатывает вот этот кусок кода
+                pr.startUserInfo(example.getUserId().toString());
+
+                // при нажатии на коменты выполнить этот код
+                //pr.startComments(example.getPostId().toString());
+
+
+
+
+                //проследить нажатия на лайк или дизлайк, в соответствии с параметром передать 1 или -1
                 if(!user.getString("id","error").equals("error")){
                     pr.addLike(user.getString("id", "1"),example.getPostId().toString(),1);
                     //example.setViews((example.getMark()+1)+"");

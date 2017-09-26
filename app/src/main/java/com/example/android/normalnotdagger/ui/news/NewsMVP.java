@@ -13,5 +13,6 @@ public interface NewsMVP {
     void addLikeError(String res);
     void startProgresBar();
     void stopProgresBar();
-
+    void startUserInfo(String avtor_id);
+    void startComments(String post_id);
 }

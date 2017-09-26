@@ -79,4 +79,10 @@ public class NewsPresentr {
         });
     }
 
+    void startUserInfo(String post_id){
+        mvp.startUserInfo(post_id);
+    }
+
+    void startComments(String post_id) { mvp.startComments(post_id);}
+
 }

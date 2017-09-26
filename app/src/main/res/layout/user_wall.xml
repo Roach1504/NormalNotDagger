@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/user_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="имя" />
+
+    <TextView
+        android:id="@+id/user_family"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="фамилия" />
+
+    <TextView
+        android:id="@+id/user_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="телефон" />
+
+    <TextView
+        android:id="@+id/user_city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="город" />
+
+    <TextView
+        android:id="@+id/user_count_pod"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="количество подписок" />
+
+    <Button
+        android:id="@+id/startmessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Написать сообщение" />
+
+    <Button
+        android:id="@+id/podpiska"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Подписаться" />
+</LinearLayout>

@@ -1,4 +1,4 @@
-package com.example.android.normalnotdagger.models.new_model.news;
+package com.example.android.normalnotdagger.ui.news;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -22,6 +22,7 @@ public class InewsFragment extends Fragment {
                 .add(R.id.news_list, youFragment)
                 .addToBackStack("myStack")
                 .commit();
+
 
         return view;
     }
