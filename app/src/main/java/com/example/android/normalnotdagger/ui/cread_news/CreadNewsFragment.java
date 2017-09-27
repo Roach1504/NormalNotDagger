@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.android.normalnotdagger.R;
+
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -30,7 +32,7 @@ import butterknife.ButterKnife;
 
 import static android.app.Activity.RESULT_OK;
 
-public class CreadNewsFragment extends Fragment implements CreadNewsMVP{
+public class CreadNewsFragment extends Fragment implements CreadNewsMVP {
 
 
     SharedPreferences user;
@@ -47,12 +49,11 @@ public class CreadNewsFragment extends Fragment implements CreadNewsMVP{
     EditText shorts;
     @BindView(R.id.text)
     EditText text;
-    @BindView(R.id.addimag)
-    Button addImag;
+
     @BindView(R.id.cread)
     Button cread;
-
-
+    @BindView(R.id.addimag)
+    FloatingActionButton addImag;
 
 
     @Nullable
@@ -61,7 +62,7 @@ public class CreadNewsFragment extends Fragment implements CreadNewsMVP{
         View view = inflater.inflate(R.layout.cread_new, container, false);
         ButterKnife.bind(this, view);
         user = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
-        creadNewsPresentr = new CreadNewsPresentr(this,user, this.getActivity());
+        creadNewsPresentr = new CreadNewsPresentr(this, user, this.getActivity());
         addImag.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,7 +74,7 @@ public class CreadNewsFragment extends Fragment implements CreadNewsMVP{
         cread.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                creadNewsPresentr.loadNew(title.getText().toString(),shorts.getText().toString(),text.getText().toString(),imags);
+                creadNewsPresentr.loadNew(title.getText().toString(), shorts.getText().toString(), text.getText().toString(), imags);
             }
         });
 
@@ -105,9 +106,9 @@ public class CreadNewsFragment extends Fragment implements CreadNewsMVP{
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Bitmap bitmap = null;
-        switch(requestCode) {
+        switch (requestCode) {
             case GALLERY_REQUEST:
-                if(resultCode == RESULT_OK){
+                if (resultCode == RESULT_OK) {
                     Uri selectedImage = data.getData();
 
                     final InputStream imageStream;
@@ -120,8 +121,14 @@ public class CreadNewsFragment extends Fragment implements CreadNewsMVP{
                         e.printStackTrace();
                     }
 
-                    Log.e("Image", "URL: "+selectedImage);
+                    Log.e("Image", "URL: " + selectedImage);
                 }
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        //null.unbind();
     }
 }

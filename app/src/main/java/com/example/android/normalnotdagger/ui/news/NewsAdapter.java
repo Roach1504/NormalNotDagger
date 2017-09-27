@@ -1,19 +1,17 @@
 package com.example.android.normalnotdagger.ui.news;
 
-import android.app.FragmentManager;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
-
 
 import com.example.android.normalnotdagger.R;
 import com.example.android.normalnotdagger.models.new_model.news.News;
-import com.example.android.normalnotdagger.ui.user_info.UserFragment;
-import com.example.android.normalnotdagger.ui.user_wall.UserWallFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,39 +81,72 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.RibotViewHolde
             pr.addView(user.getString("id", "1"), example.getPostId().toString());
         }
 
+        holder.comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pr.startComments(example.getPostId().toString());
+
+                //тут комменты
+            }
+        });
+
+        holder.like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!user.getString("id","error").equals("error")) {
+                    pr.addLike(user.getString("id", "1"), example.getPostId().toString(), 1);
+                    example.setViews((example.getMark() + 1) + "");
+                    holder.ratingTextView.setText(example.getMark().toString());
+                    //лайк
+                }
+            }
+        });
+
+        holder.deslike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //код для дизлайка
+            }
+        });
+
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
 
-                Log.e("image","imag: "+example.getImages());
+//                Log.e("image","imag: "+example.getImages());
+//
+//
+//                // при онклике на имя автора сробатывает вот этот кусок кода
+//                pr.startUserInfo(example.getUserId().toString());
+//
+//                // при нажатии на коменты выполнить этот код
+//                //pr.startComments(example.getPostId().toString());
+//
+//
+//
+//
+//                //проследить нажатия на лайк или дизлайк, в соответствии с параметром передать 1 или -1
+//                if(!user.getString("id","error").equals("error")){
+//                    pr.addLike(user.getString("id", "1"),example.getPostId().toString(),1);
+//                    //example.setViews((example.getMark()+1)+"");
+//                }
+//                else{
+//                    //заблочить кнопки лайка
+//                }
 
-
-                // при онклике на имя автора сробатывает вот этот кусок кода
-                pr.startUserInfo(example.getUserId().toString());
-
-                // при нажатии на коменты выполнить этот код
-                //pr.startComments(example.getPostId().toString());
-
-
-
-
-                //проследить нажатия на лайк или дизлайк, в соответствии с параметром передать 1 или -1
-                if(!user.getString("id","error").equals("error")){
-                    pr.addLike(user.getString("id", "1"),example.getPostId().toString(),1);
-                    //example.setViews((example.getMark()+1)+"");
-                }
-                else{
-                    //заблочить кнопки лайка
-                }
-//                itemClickAdapter(v.getContext(), holder.getAdapterPosition());
+                
+                itemClickAdapter(v.getContext(), holder.getAdapterPosition());
                 Log.e("click", "click id= "+ example.getPostId());
 
             }
         });
     }
 
-//    public void itemClickAdapter(Context context, int position) {
+    public void itemClickAdapter(Context context, int position) {
+        //код для перехода в полную новость
+
+
 //        Example example = mRibots.get(position);
 //        Intent intent = new Intent(context, UserActivity.class);
 //
@@ -131,7 +162,14 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.RibotViewHolde
 //
 //        context.startActivity(intent);
 
-//    }
+
+
+
+
+
+
+
+    }
 
     @Override
     public int getItemCount() {
@@ -156,6 +194,12 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.RibotViewHolde
         TextView ratingTextView;
         @BindView(R.id.layout)
         View layout;
+        @BindView(R.id.comment)
+        ImageView comment;
+        @BindView(R.id.like)
+        ImageView like;
+        @BindView(R.id.deslike)
+        ImageView deslike;
 
 
         public RibotViewHolder(View itemView) {
