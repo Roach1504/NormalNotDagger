@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 import com.example.android.normalnotdagger.R;
 import com.example.android.normalnotdagger.models.new_model.news.News;
-import com.example.android.normalnotdagger.ui.commits.CommentFragment;
+
 import com.example.android.normalnotdagger.ui.commits.ICommentsFragment;
 import com.example.android.normalnotdagger.ui.user_wall.UserWallFragment;
 

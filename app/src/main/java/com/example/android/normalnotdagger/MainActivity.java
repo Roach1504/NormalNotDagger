@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.android.normalnotdagger.ui.map.MapFragment;
 import com.example.android.normalnotdagger.ui.news.InewsFragment;
 import com.example.android.normalnotdagger.ui.cread_news.CreadNewsFragment;
 import com.example.android.normalnotdagger.ui.user_info.UserFragment;
@@ -122,6 +123,18 @@ public class MainActivity extends AppCompatActivity
                     .commit();
 
         } else if (id == R.id.nav_manage) {
+            fragment = null;
+            fragmentClass = null;
+            try {
+                fragment = (Fragment) MapFragment.class.newInstance();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+
+            android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content, fragment).commit();
 
         } else if (id == R.id.nav_share) {
 

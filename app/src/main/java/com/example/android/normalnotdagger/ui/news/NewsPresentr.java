@@ -22,14 +22,19 @@ public class NewsPresentr {
         App.getApi().getData("20", offset, "1").enqueue(new Callback<NewsModel>() {
             @Override
             public void onResponse(Call<NewsModel> call, Response<NewsModel> response) {
-                Log.e("sizeTest", response.body().getNews().get(0).getText() + "test");
-                if(response.body().getNews().isEmpty()){
-                    mvp.showIsEmpty();
-                    mvp.stopProgresBar();
+                Log.e("error",response.message());
+                if(response.message().equals("OK")) {
+                    Log.e("sizeTest", response.body().getNews().get(0).getText() + "test");
+                    if (response.body().getNews().isEmpty()) {
+                        mvp.showIsEmpty();
+                        mvp.stopProgresBar();
+                    } else {
+                        mvp.showNews(response.body().getNews());
+                        mvp.stopProgresBar();
+                    }
                 }
                 else{
-                    mvp.showNews(response.body().getNews());
-                    mvp.stopProgresBar();
+                    mvp.showError();
                 }
 
             }
