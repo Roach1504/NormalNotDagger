@@ -135,7 +135,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.RibotViewHolde
 //                    //заблочить кнопки лайка
 //                }
 
-                
+
                 itemClickAdapter(v.getContext(), holder.getAdapterPosition());
                 Log.e("click", "click id= "+ example.getPostId());
 
