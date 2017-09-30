@@ -63,7 +63,7 @@
         android:layout_marginRight="32dp"
         android:layout_below="@+id/pass"
         android:text="INVISIBLE TEXT"
-
+        android:visibility="invisible"
         android:layout_alignRight="@+id/pass"
         android:layout_alignEnd="@+id/pass" />
 

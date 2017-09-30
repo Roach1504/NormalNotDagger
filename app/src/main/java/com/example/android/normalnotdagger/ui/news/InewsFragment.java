@@ -19,7 +19,7 @@ public class InewsFragment extends Fragment {
         NewsFragment youFragment = new NewsFragment();
         android.app.FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()          // получаем экземпляр FragmentTransaction
-                .add(R.id.news_list, youFragment)
+                .replace(R.id.news_list, youFragment)
                 .addToBackStack("myStack")
                 .commit();
 

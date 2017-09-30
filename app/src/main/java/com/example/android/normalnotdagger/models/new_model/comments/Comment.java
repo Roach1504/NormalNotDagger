@@ -16,6 +16,11 @@ public class Comment {
     @Expose
     private String text;
 
+    @SerializedName("user_login")
+    @Expose
+    private String user_login;
+
+
     public Integer getUserId() {
         return userId;
     }
@@ -38,6 +43,14 @@ public class Comment {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public String getUser_login() {
+        return user_login;
+    }
+
+    public void setUser_login(String user_login) {
+        this.user_login = user_login;
     }
 
 }

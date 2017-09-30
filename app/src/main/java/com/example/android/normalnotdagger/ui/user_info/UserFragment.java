@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -43,6 +44,7 @@ public class UserFragment extends Fragment implements UserMVP{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         user = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
         view = inflater.inflate(R.layout.user_info, container, false);
+
 
         Log.e("id", "id = "+user.getString("id","error"));
         if(!user.getString("id","error").equals("error")){
@@ -79,11 +81,11 @@ public class UserFragment extends Fragment implements UserMVP{
 
     @Override
     public void showInfo(String name, String family, String city, String tel, String countPodpis) {
-        this.name.setText(name);
-        this.family.setText(family);
-        this.city.setText(city);
-        this.tel.setText(tel);
-        this.p.setText(countPodpis);
+        this.name.setText("Имя:\n"+name);
+        this.family.setText("Фамилия: \n"+family);
+        this.city.setText("Город: \n"+city);
+        this.tel.setText("Телефон: \n"+tel);
+        this.p.setText("Подписчиков: \n"+countPodpis);
     }
 
     @Override

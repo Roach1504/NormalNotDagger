@@ -36,7 +36,6 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
         }
     }
 
-
     @Override
     public CommentsAdapter.CommentsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
@@ -50,7 +49,7 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
         Comment item = comments.get(position);
         Log.e("nameAdapter", item.getUserId().toString());
 
-        holder.avtor.setText(item.getUserId().toString());
+        holder.avtor.setText(item.getUser_login());
         holder.text.setText(item.getText());
         holder.data.setText(item.getDate());
 
