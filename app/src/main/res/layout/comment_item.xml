@@ -13,27 +13,67 @@
     app:cardCornerRadius="2dp"
 
     >
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/user_ids"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Имя" />
+        android:layout_margin="16dp"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/text_comment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Текст" />
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="16dp"
+            android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/data_comment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="дата" />
-</LinearLayout>
+            <ImageView
+                android:id="@+id/avatar"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_account_circle_amber_500_24dp"
+
+
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/data_comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="дата"
+
+                    android:textColor="@color/textLabel"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/user_ids"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:text="Имя"
+                    android:textColor="@color/textHead"
+                    android:textSize="14dp" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/text_comment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:text="Текст"
+            android:textColor="@color/textSubtitle"
+            android:textSize="14dp" />
+    </LinearLayout>
 </android.support.v7.widget.CardView>

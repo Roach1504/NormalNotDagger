@@ -2,26 +2,44 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginTop="16dp"
+    android:layout_marginLeft="32dp"
+    android:layout_marginRight="32dp">
 
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="3">
     <EditText
         android:id="@+id/textComment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Комментарий" />
+        android:inputType="textMultiLine"
+        android:maxLength="200"
+        android:hint="Комментарий"
+        android:layout_weight="4"
+        />
 
-    <Button
+    <ImageView
+        android:src="@drawable/ic_menu_send"
         android:id="@+id/addComment"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Добавить коментарий" />
+        android:text="Добавить коментарий"
+        android:layout_gravity="top"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="16dp"
+        android:clickable="true"
+        android:textColor="@color/white"/>
+</LinearLayout>
     <FrameLayout
         android:id="@+id/comment_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp">
     </FrameLayout>
 </LinearLayout>
 
