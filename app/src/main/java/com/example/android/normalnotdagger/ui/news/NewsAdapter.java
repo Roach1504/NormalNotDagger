@@ -3,7 +3,8 @@ package com.example.android.normalnotdagger.ui.news;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,7 +73,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.RibotViewHolde
 //            }
 
         holder.dateTextView.setText(example.getDate());
-        holder.autorTextView.setText(example.getUserLogin());
+        SpannableString spannableString = new SpannableString(example.getUserLogin());
+        spannableString.setSpan(new UnderlineSpan(),0, example.getUserLogin().length(), 0);
+        holder.autorTextView.setText(spannableString);
         holder.headTextView.setText(example.getTitle());
         holder.subTextView.setText(example.getShort());
         holder.viewsTextView.setText(example.getViews());
@@ -80,6 +83,13 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.RibotViewHolde
         if(!user.getString("id","error").equals("error")){
             pr.addView(user.getString("id", "1"), example.getPostId().toString());
         }
+
+        holder.autorTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pr.startUserInfo(example.getUserId().toString());
+            }
+        });
 
         holder.comment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,7 +122,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.RibotViewHolde
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                pr.startFullNews(example.getPostId().toString());
 
 //                Log.e("image","imag: "+example.getImages());
 //
@@ -136,8 +146,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.RibotViewHolde
 //                }
 
 
-                itemClickAdapter(v.getContext(), holder.getAdapterPosition());
-                Log.e("click", "click id= "+ example.getPostId());
+//                itemClickAdapter(v.getContext(), holder.getAdapterPosition());
+//                Log.e("click", "click id= "+ example.getPostId());
 
             }
         });

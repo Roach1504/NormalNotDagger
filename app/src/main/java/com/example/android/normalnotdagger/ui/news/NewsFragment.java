@@ -10,14 +10,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
 import com.example.android.normalnotdagger.R;
 import com.example.android.normalnotdagger.models.new_model.news.News;
-
 import com.example.android.normalnotdagger.ui.commits.ICommentsFragment;
+import com.example.android.normalnotdagger.ui.full_news.FullNewsFragment;
 import com.example.android.normalnotdagger.ui.user_wall.UserWallFragment;
 
 import java.util.ArrayList;
@@ -119,5 +119,19 @@ public class NewsFragment extends Fragment implements NewsMVP{
                 .commit();
 
     }
+    @Override
+    public void startFullNews(String post_id) {
+        FullNewsFragment youFragment = new FullNewsFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("post_id", post_id);
+        youFragment.setArguments(bundle);
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentManager.beginTransaction()          // получаем экземпляр FragmentTransaction
+                .replace(R.id.content, youFragment)
+                .addToBackStack("myStack")
+                .commit();
+
+    }
+
 
 }

@@ -15,4 +15,7 @@ public interface NewsMVP {
     void stopProgresBar();
     void startUserInfo(String avtor_id);
     void startComments(String post_id);
+
+
+    void startFullNews(String post_id);
 }

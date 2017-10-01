@@ -88,6 +88,10 @@ public class NewsPresentr {
         mvp.startUserInfo(post_id);
     }
 
+    void startFullNews(String post_id){
+        mvp.startFullNews(post_id);
+    }
+
     void startComments(String post_id) { mvp.startComments(post_id);}
 
 }

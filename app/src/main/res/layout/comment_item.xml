@@ -47,7 +47,7 @@
                     android:id="@+id/data_comment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
+
                     android:text="дата"
 
                     android:textColor="@color/textLabel"
@@ -71,7 +71,8 @@
             android:id="@+id/text_comment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="6dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
             android:text="Текст"
             android:textColor="@color/textSubtitle"
             android:textSize="14dp" />

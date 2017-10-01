@@ -1,46 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="16dp"
-    android:layout_marginLeft="32dp"
-    android:layout_marginRight="32dp">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:weightSum="3">
-    <EditText
-        android:id="@+id/textComment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textMultiLine"
-        android:maxLength="200"
-        android:hint="Комментарий"
-        android:layout_weight="4"
-        />
+    >
 
-    <ImageView
-        android:src="@drawable/ic_menu_send"
-        android:id="@+id/addComment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Добавить коментарий"
-        android:layout_gravity="top"
-        android:layout_marginTop="8dp"
-        android:layout_marginLeft="16dp"
-        android:clickable="true"
-        android:textColor="@color/white"/>
-</LinearLayout>
+
     <FrameLayout
         android:id="@+id/comment_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="16dp">
+        android:layout_above="@+id/linearLayout2"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="8dp"
+        >
     </FrameLayout>
-</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/linearLayout2"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:paddingLeft="32dp"
+        android:paddingRight="16dp"
+        android:background="@color/white">
+
+        <EditText
+            android:id="@+id/textComment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:ems="10"
+            android:hint="Комментарий"
+            android:inputType="textMultiLine"
+            android:maxLength="200" />
+
+        <ImageView
+            android:id="@+id/addComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:clickable="true"
+            android:src="@drawable/ic_menu_send"
+            android:text="Добавить коментарий"
+            android:textColor="@color/white" />
+    </LinearLayout>
+</RelativeLayout>
 
 
